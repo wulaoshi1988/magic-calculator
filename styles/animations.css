@@ -1,0 +1,335 @@
+/* 魔术计算器动画效果 */
+
+/* 数字飞入动画 */
+@keyframes flyIn {
+    0% {
+        transform: translateY(-100px) rotate(180deg) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(20px) rotate(90deg) scale(1.2);
+    }
+    100% {
+        transform: translateY(0) rotate(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.fly-in {
+    animation: flyIn 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 按钮点击效果 */
+@keyframes buttonPress {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.button-press {
+    animation: buttonPress 0.2s ease-out;
+}
+
+/* 触摸点效果 */
+.touch-point {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: touchRipple 1.5s ease-out forwards;
+}
+
+@keyframes touchRipple {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* 盲点数字出现效果 */
+@keyframes blindNumberAppear {
+    0% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.blind-number-appear {
+    animation: blindNumberAppear 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 魔术模式启动动画 */
+@keyframes magicModeStart {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.magic-mode-start {
+    animation: magicModeStart 0.6s ease-out;
+}
+
+/* 运算符号动画 */
+@keyframes operatorSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.5); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.operator-spin {
+    animation: operatorSpin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 数字震动效果 */
+@keyframes numberShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.number-shake {
+    animation: numberShake 0.6s ease-out;
+}
+
+/* 时间揭晓震撼效果 */
+@keyframes timeReveal {
+    0% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+    75% {
+        transform: scale(0.9) rotate(90deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.time-reveal-animation {
+    animation: timeReveal 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 背景闪烁效果 */
+@keyframes backgroundFlash {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 0.3; }
+}
+
+.background-flash {
+    animation: backgroundFlash 0.3s ease-out;
+}
+
+/* 数字滚动效果 */
+@keyframes numberRoll {
+    0% { transform: translateY(-100%) rotateX(90deg); opacity: 0; }
+    50% { transform: translateY(0) rotateX(0deg); opacity: 1; }
+    100% { transform: translateY(0) rotateX(0deg); opacity: 1; }
+}
+
+.number-roll {
+    animation: numberRoll 1s ease-out;
+    transform-style: preserve-3d;
+}
+
+/* 聚光灯扫过效果 */
+@keyframes spotlightSweep {
+    0% {
+        transform: translate(-100%, -50%) scale(2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(100%, -50%) scale(2);
+        opacity: 0.8;
+    }
+}
+
+.spotlight-sweep {
+    animation: spotlightSweep 2s ease-out;
+}
+
+/* 星星闪烁增强 */
+@keyframes starTwinkle {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.star-twinkle {
+    animation: starTwinkle 1.5s ease-in-out infinite;
+}
+
+/* 输入框聚焦效果 */
+@keyframes inputFocus {
+    0% { 
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0.3);
+    }
+    100% { 
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.input-focus {
+    animation: inputFocus 0.3s ease-out forwards;
+}
+
+/* 成功脉冲效果 */
+@keyframes successPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0, 184, 148, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(0, 184, 148, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0, 184, 148, 0.4);
+    }
+}
+
+.success-pulse {
+    animation: successPulse 1.5s ease-out;
+}
+
+/* 错误震动效果 */
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+.error-shake {
+    animation: errorShake 0.5s ease-out;
+}
+
+/* 加载动画 */
+@keyframes loadingSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spin {
+    animation: loadingSpin 1s linear infinite;
+}
+
+/* 淡入淡出 */
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.fade-in-out {
+    animation: fadeInOut 2s ease-in-out;
+}
+
+/* 弹跳效果 */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+
+.bounce {
+    animation: bounce 1s ease-out;
+}
+
+/* 放大消失效果 */
+@keyframes scaleOut {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.scale-out {
+    animation: scaleOut 0.6s ease-out forwards;
+}
+
+/* 移动端触摸优化 */
+@media (max-width: 768px) {
+    .fly-in {
+        animation-duration: 0.8s;
+    }
+    
+    .touch-point {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .time-reveal-animation {
+        animation-duration: 1.5s;
+    }
+}
+
+@media (max-width: 480px) {
+    .fly-in {
+        animation-duration: 0.6s;
+    }
+    
+    .touch-point {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* 火花和粒子效果 */
+@keyframes sparkFly {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--random-x)), calc(-50% + var(--random-y))) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--random-x)), calc(-50% + var(--random-y))) scale(0);
+        opacity: 0;
+    }
+}

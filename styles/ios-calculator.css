@@ -1,0 +1,642 @@
+/* iOS风格魔术计算器样式 */
+
+/* iOS计算器容器 */
+.ios-calculator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 375px;
+    height: 812px;
+    background: #000000;
+    border-radius: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+/* iOS显示屏 */
+.ios-display {
+    background: #000000;
+    padding: 20px 30px;
+    text-align: right;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.ios-operation-text {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 0.6;
+    margin-bottom: 8px;
+    min-height: 24px;
+}
+
+.ios-main-text {
+    color: #ffffff;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -2px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.ios-magic-indicator {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.ios-magic-indicator span {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.magic-icon {
+    font-size: 16px;
+}
+
+/* iOS魔术显示区域 */
+.ios-magic-display {
+    background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+    padding: 20px 30px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.magic-step {
+    text-align: center;
+}
+
+.step-label {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.step-number {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 300;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    letter-spacing: 4px;
+}
+
+/* iOS键盘区域 */
+.ios-keypad {
+    flex: 1;
+    background: #000000;
+    padding: 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ios-keypad-row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+/* iOS按钮样式 */
+.ios-btn {
+    flex: 1;
+    height: 72px;
+    border: none;
+    border-radius: 50%;
+    font-size: 32px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ios-btn:active {
+    transform: scale(0.95);
+}
+
+.ios-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.ios-btn:active::before {
+    width: 100%;
+    height: 100%;
+}
+
+/* 按钮颜色变体 */
+.ios-btn-number {
+    background: #333333;
+    color: #ffffff;
+}
+
+.ios-btn-number:hover {
+    background: #4a4a4a;
+}
+
+.ios-btn-dark {
+    background: #a6a6a6;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.ios-btn-dark:hover {
+    background: #bfbfbf;
+}
+
+.ios-btn-operator {
+    background: #ff9f0a;
+    color: #ffffff;
+}
+
+.ios-btn-operator:hover {
+    background: #ffb145;
+}
+
+.ios-btn-clear {
+    background: #a6a6a6;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.ios-btn-clear:hover {
+    background: #bfbfbf;
+}
+
+.ios-btn-function {
+    background: #a6a6a6;
+    color: #000000;
+    font-size: 28px;
+}
+
+.ios-btn-function:hover {
+    background: #bfbfbf;
+}
+
+.ios-btn-equals {
+    background: #ff9f0a;
+    color: #ffffff;
+    font-size: 36px;
+}
+
+.ios-btn-equals:hover {
+    background: #ffb145;
+}
+
+.ios-btn-wide {
+    flex: 2.2;
+}
+
+/* iOS魔术输入界面 */
+.ios-magic-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+.ios-input-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background: #1a1a1a;
+}
+
+.ios-back-btn,
+.ios-confirm-btn {
+    background: none;
+    border: none;
+    color: #007aff;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.ios-back-btn:hover,
+.ios-confirm-btn:hover {
+    background: rgba(0, 122, 255, 0.1);
+}
+
+.ios-input-title {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.ios-input-field {
+    padding: 20px 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.ios-text-input {
+    background: #1a1a1a;
+    border: 2px solid #333333;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 300;
+    text-align: center;
+    padding: 16px 24px;
+    width: 280px;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    letter-spacing: 4px;
+    transition: border-color 0.2s;
+}
+
+.ios-text-input:focus {
+    outline: none;
+    border-color: #007aff;
+}
+
+.ios-text-input::placeholder {
+    color: #666666;
+}
+
+.ios-number-keypad {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* iOS盲点输入界面 */
+.ios-blind-touch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+.ios-blind-header {
+    padding: 40px 30px 20px;
+    text-align: center;
+}
+
+.ios-blind-title {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.ios-touch-area {
+    flex: 1;
+    position: relative;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.ios-touch-points {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ios-blind-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.ios-blind-text {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 300;
+    opacity: 0.3;
+}
+
+/* iOS触摸点效果 */
+.ios-touch-point {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 159, 10, 0.6) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: iosTouchRipple 1.5s ease-out forwards;
+}
+
+@keyframes iosTouchRipple {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* iOS计算过程界面 */
+.ios-calculation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ios-calc-display {
+    text-align: center;
+    padding: 40px;
+}
+
+.ios-calc-line {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    letter-spacing: 2px;
+    animation: iosCalcLineFadeIn 1s ease-out;
+}
+
+.ios-calc-number {
+    color: #ffffff;
+}
+
+.ios-calc-op {
+    color: #ff9f0a;
+    margin: 0 20px;
+}
+
+.ios-calc-result {
+    color: #ffffff;
+    font-size: 56px;
+    font-weight: 300;
+    margin-top: 40px;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    animation: iosCalcResultFadeIn 1.5s ease-out;
+}
+
+.ios-calc-equals {
+    color: #a6a6a6;
+    margin-right: 20px;
+}
+
+.ios-final-number {
+    color: #ff9f0a;
+    font-weight: 600;
+}
+
+@keyframes iosCalcLineFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes iosCalcResultFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* iOS时间揭晓界面 */
+.ios-time-reveal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ios-reveal-animation {
+    text-align: center;
+    animation: iosRevealScaleIn 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.ios-magic-text {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.ios-time-result {
+    color: #ff9f0a;
+    font-size: 96px;
+    font-weight: 300;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(255, 159, 10, 0.3);
+}
+
+.ios-reveal-subtitle {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+@keyframes iosRevealScaleIn {
+    0% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(90deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* iOS重新开始界面 */
+.ios-restart {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.ios-restart-btn {
+    background: #ff9f0a;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    padding: 16px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ios-restart-btn:hover {
+    background: #ffb145;
+    transform: translateY(-2px);
+}
+
+.ios-restart-btn:active {
+    transform: translateY(0);
+}
+
+/* 响应式设计 */
+@media (max-width: 414px) {
+    .ios-calculator {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    .ios-btn {
+        height: 60px;
+        font-size: 28px;
+    }
+    
+    .ios-main-text {
+        font-size: 60px;
+    }
+    
+    .ios-time-result {
+        font-size: 72px;
+    }
+}
+
+@media (max-width: 375px) {
+    .ios-btn {
+        height: 56px;
+        font-size: 24px;
+    }
+    
+    .ios-main-text {
+        font-size: 56px;
+    }
+    
+    .ios-time-result {
+        font-size: 64px;
+    }
+}
+
+/* 横屏适配 */
+@media (orientation: landscape) and (max-height: 500px) {
+    .ios-calculator {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    .ios-display {
+        min-height: 120px;
+        padding: 15px 25px;
+    }
+    
+    .ios-main-text {
+        font-size: 48px;
+    }
+    
+    .ios-btn {
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+/* iOS系统字体 */
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display'), local('-apple-system');
+}
+
+@font-face {
+    font-family: 'SF Mono';
+    src: local('SF Mono'), local('Monaco');
+}
+
+/* 应用iOS字体 */
+.ios-calculator {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.ios-main-text,
+.ios-time-result,
+.step-number,
+.ios-calc-line,
+.ios-calc-result {
+    font-family: 'SF Mono', 'Monaco', monospace;
+}

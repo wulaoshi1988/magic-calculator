@@ -1,0 +1,373 @@
+/* 苹果手机适配版 - 真实计算器UI */
+
+/* 基础适配 */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    background: #000000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#app {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 头部适配 */
+#header {
+    display: none; /* 在真实计算器模式下隐藏头部 */
+}
+
+/* 苹果计算器主体 */
+.apple-calculator {
+    background: #000000;
+    border-radius: 0; /* 移除圆角，像真实iPhone */
+    box-shadow: none; /* 移除阴影 */
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 隐藏所有魔术相关元素 */
+.magic-indicator {
+    display: none !important;
+}
+
+/* 显示屏 - 真实iPhone样式 */
+.display {
+    background: #000000;
+    padding: 32px 20px 16px 20px;
+    text-align: right;
+    border-bottom: 1px solid #1a1a1a;
+    flex: 0 0 auto;
+}
+
+.main-display {
+    color: #ffffff;
+    font-size: 96px; /* iPhone上更大的字体 */
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -2px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-shadow: none;
+}
+
+.operation-display {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 0.6;
+    margin-bottom: 8px;
+    min-height: 24px;
+    font-family: 'SF Mono', 'Monaco', monospace;
+}
+
+/* 键盘区域 - 真实iPhone布局 */
+.keypad {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 12px;
+    padding: 12px;
+    flex: 1;
+    background: #000000;
+}
+
+.keypad-row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+/* 按钮样式 - 真实iPhone样式 */
+.btn {
+    flex: 1;
+    height: 80px; /* iPhone上更大的按钮 */
+    border: none;
+    border-radius: 50%;
+    font-size: 36px; /* 更大的字体 */
+    font-weight: 400;
+    cursor: pointer;
+    transition: none; /* 移除所有过渡效果 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    outline: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 移除所有动画和伪元素 */
+.btn::before {
+    display: none;
+}
+
+.btn:active {
+    transform: none;
+    box-shadow: none;
+}
+
+/* 数字按钮 - 真实iPhone颜色 */
+.number {
+    background: #333333;
+    color: #ffffff;
+}
+
+.operator {
+    background: #ff9f0a;
+    color: #ffffff;
+}
+
+.btn-clear {
+    background: #a6a6a6;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.btn-equals {
+    background: #ff9f0a;
+    color: #ffffff;
+    font-size: 40px;
+}
+
+/* 零按钮特殊样式 */
+.btn[data-value="0"] {
+    flex: 2.2;
+    border-radius: 40px;
+}
+
+/* 移除所有魔术效果 */
+.magic-mode {
+    animation: none !important;
+}
+
+.blind-input-effect {
+    animation: none !important;
+}
+
+.number-flash {
+    animation: none !important;
+}
+
+.magic-result-animation {
+    animation: none !important;
+}
+
+.apple-calculator.magic-mode {
+    box-shadow: none !important;
+}
+
+/* 隐藏所有魔术提示 */
+.magic-hint {
+    display: none !important;
+}
+
+/* 隐藏所有魔术弹窗 */
+.magic-result-modal {
+    display: none !important;
+}
+
+/* 通用类隐藏 */
+.hidden {
+    display: none !important;
+}
+
+/* iPhone刘海屏适配 */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .display {
+        padding-top: calc(32px + env(safe-area-inset-top));
+    }
+}
+
+/* iPhone底部Home指示器适配 */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .keypad {
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+}
+
+/* 竖屏模式优化 */
+@media (orientation: portrait) {
+    .main-display {
+        font-size: 96px;
+        min-height: 100px;
+    }
+    
+    .btn {
+        height: 80px;
+        font-size: 36px;
+    }
+    
+    .keypad {
+        gap: 12px;
+        padding: 12px;
+    }
+}
+
+/* 小屏幕iPhone适配 */
+@media (max-width: 375px) {
+    .main-display {
+        font-size: 84px;
+        min-height: 88px;
+    }
+    
+    .btn {
+        height: 72px;
+        font-size: 32px;
+    }
+    
+    .keypad {
+        gap: 10px;
+        padding: 10px;
+    }
+}
+
+/* 更小的iPhone适配 */
+@media (max-width: 320px) {
+    .main-display {
+        font-size: 72px;
+        min-height: 76px;
+    }
+    
+    .btn {
+        height: 64px;
+        font-size: 28px;
+    }
+    
+    .keypad {
+        gap: 8px;
+        padding: 8px;
+    }
+}
+
+/* 横屏模式优化 */
+@media (orientation: landscape) {
+    .display {
+        padding: 16px 20px 8px 20px;
+        flex: 0 0 auto;
+    }
+    
+    .main-display {
+        font-size: 64px;
+        min-height: 72px;
+    }
+    
+    .keypad {
+        grid-template-rows: repeat(5, 1fr);
+        max-height: 50vh;
+    }
+    
+    .btn {
+        height: 60px;
+        font-size: 28px;
+    }
+    
+    .keypad {
+        gap: 8px;
+        padding: 8px;
+    }
+}
+
+/* iPad适配 */
+@media (min-width: 768px) {
+    .apple-calculator {
+        max-width: 420px;
+        max-height: 896px;
+        margin: 0 auto;
+        border-radius: 20px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .display {
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .keypad {
+        border-radius: 0 0 20px 20px;
+    }
+}
+
+/* iPad Pro适配 */
+@media (min-width: 1024px) {
+    .apple-calculator {
+        max-width: 400px;
+        max-height: 800px;
+    }
+    
+    .btn {
+        height: 70px;
+        font-size: 32px;
+    }
+}
+
+/* iPhone X及以后的适配 */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .apple-calculator {
+        padding-top: env(safe-area-inset-top);
+    }
+}
+
+/* 确保在全屏模式下也能正常工作 */
+@media (display-mode: standalone) {
+    .apple-calculator {
+        height: 100vh;
+        height: 100dvh; /* 使用动态视口高度 */
+    }
+}
+
+/* 暗黑模式支持 */
+@media (prefers-color-scheme: dark) {
+    /* 暗黑模式下保持不变，因为就是黑色计算器 */
+}
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+    .btn {
+        transition: none;
+    }
+    
+    /* 所有动画都被禁用 */
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .number {
+        background: #1a1a1a;
+    }
+    
+    .operator,
+    .btn-equals {
+        background: #ff6b00;
+    }
+    
+    .btn-clear {
+        background: #808080;
+    }
+}

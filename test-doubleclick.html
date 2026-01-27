@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双击测试 - 魔术计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .test-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 20px 0;
+            text-align: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .status {
+            font-size: 18px;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        .success { background: rgba(0, 184, 148, 0.3); }
+        .error { background: rgba(255, 107, 107, 0.3); }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #00b894;
+            color: white;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎭 魔术计算器双击测试</h1>
+    
+    <div class="test-area" id="testArea">
+        <h3>👆 双击这个区域</h3>
+        <p>如果双击有效，你会看到"双击检测成功！"</p>
+    </div>
+    
+    <div class="status" id="status">
+        状态: 等待双击...
+    </div>
+    
+    <button onclick="simulateDoubleClick()">模拟双击</button>
+    <button onclick="openOriginalCalculator()">打开原始计算器</button>
+    <button onclick="testWithConsole()">控制台测试</button>
+
+    <script>
+        let lastClickTime = 0;
+        let clickCount = 0;
+        
+        const status = document.getElementById('status');
+        const testArea = document.getElementById('testArea');
+        
+        function updateStatus(message, type = 'info') {
+            status.textContent = `状态: ${message}`;
+            status.className = `status ${type}`;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        testArea.addEventListener('click', (e) => {
+            clickCount++;
+            const currentTime = Date.now();
+            const timeDiff = currentTime - lastClickTime;
+            
+            updateStatus(`点击 #${clickCount}, 时间差: ${timeDiff}ms`, 'info');
+            
+            if (timeDiff < 300) {
+                updateStatus('🎉 双击检测成功！', 'success');
+                
+                // 添加视觉反馈
+                testArea.style.background = 'rgba(0, 184, 148, 0.3)';
+                setTimeout(() => {
+                    testArea.style.background = 'rgba(255, 255, 255, 0.1)';
+                }, 500);
+                
+                // 模拟启动魔术模式
+                setTimeout(() => {
+                    updateStatus('🎩 魔术模式已启动！', 'success');
+                    alert('双击测试成功！现在你可以去试试原始的计算器了。');
+                }, 1000);
+            }
+            
+            lastClickTime = currentTime;
+            
+            // 重置点击计数
+            setTimeout(() => {
+                if (Date.now() - lastClickTime > 1000) {
+                    clickCount = 0;
+                    updateStatus('重置: 等待双击...', 'info');
+                }
+            }, 1000);
+        });
+        
+        function simulateDoubleClick() {
+            updateStatus('🤖 模拟双击...', 'info');
+            testArea.click();
+            setTimeout(() => testArea.click(), 100);
+        }
+        
+        function openOriginalCalculator() {
+            window.open('../index.html', '_blank');
+        }
+        
+        function testWithConsole() {
+            updateStatus('🔍 检查原始计算器...', 'info');
+            
+            // 在新窗口中测试
+            const testWindow = window.open('../index.html', '_blank', 'width=800,height=600');
+            
+            setTimeout(() => {
+                try {
+                    testWindow.postMessage({
+                        type: 'TEST_DOUBLE_CLICK'
+                    }, '*');
+                } catch (e) {
+                    updateStatus('❌ 无法测试跨窗口', 'error');
+                }
+            }, 2000);
+        }
+        
+        // 页面加载完成
+        window.addEventListener('load', () => {
+            updateStatus('✅ 页面加载完成，开始测试...', 'success');
+        });
+        
+        // 监听来自原始窗口的消息
+        window.addEventListener('message', (e) => {
+            if (e.data.type === 'MAGIC_MODE_STARTED') {
+                updateStatus('🎩 收到魔术模式启动消息！', 'success');
+            }
+        });
+    </script>
+</body>
+</html>

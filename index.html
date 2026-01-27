@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔术计算器 - 神奇的时间预言</title>
+    <link rel="stylesheet" href="styles/iphone-calculator.css">
+</head>
+<body>
+    <!-- 主容器 -->
+    <div id="app">
+        <!-- 标题区域 -->
+        <header id="header">
+            <h1>魔术计算器</h1>
+            <p class="subtitle">双击空白处启动魔术模式</p>
+        </header>
+
+        <!-- 苹果计算器界面 -->
+        <main id="normal-mode">
+            <section class="apple-calculator" id="apple-calculator">
+                <!-- 魔术模式指示器 -->
+                <div class="magic-indicator" id="magic-indicator">✨ 魔术模式</div>
+                
+                <!-- 显示屏 -->
+                <div class="display">
+                    <div class="operation-display" id="operation-display"></div>
+                    <div class="main-display" id="main-display">0</div>
+                </div>
+                
+                <!-- 键盘区域 -->
+                <div class="keypad">
+                    <!-- 第一行 -->
+                    <div class="keypad-row">
+                        <button class="btn btn-clear" id="clear">AC</button>
+                        <button class="btn" data-value="+/-">+/-</button>
+                        <button class="btn" data-value="%">%</button>
+                        <button class="btn operator" data-value="/">÷</button>
+                    </div>
+                    
+                    <!-- 第二行 -->
+                    <div class="keypad-row">
+                        <button class="btn number" data-value="7">7</button>
+                        <button class="btn number" data-value="8">8</button>
+                        <button class="btn number" data-value="9">9</button>
+                        <button class="btn operator" data-value="*">×</button>
+                    </div>
+                    
+                    <!-- 第三行 -->
+                    <div class="keypad-row">
+                        <button class="btn number" data-value="4">4</button>
+                        <button class="btn number" data-value="5">5</button>
+                        <button class="btn number" data-value="6">6</button>
+                        <button class="btn operator" data-value="-">−</button>
+                    </div>
+                    
+                    <!-- 第四行 -->
+                    <div class="keypad-row">
+                        <button class="btn number" data-value="1">1</button>
+                        <button class="btn number" data-value="2">2</button>
+                        <button class="btn number" data-value="3">3</button>
+                        <button class="btn operator" data-value="+">+</button>
+                    </div>
+                    
+                    <!-- 第五行 -->
+                    <div class="keypad-row">
+                        <button class="btn number" data-value="0">0</button>
+                        <button class="btn number" data-value=".">.</button>
+                        <button class="btn btn-equals" id="equals">=</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- iOS风格魔术模式界面 -->
+        <section id="magic-mode" class="hidden">
+            <!-- iOS计算器容器 -->
+            <div class="ios-calculator">
+                <!-- 显示屏 -->
+                <div class="ios-display">
+                    <div class="ios-operation-text" id="ios-operation-text"></div>
+                    <div class="ios-main-text" id="ios-main-text">0</div>
+                    <div class="ios-magic-indicator hidden" id="ios-magic-indicator">
+                        <span class="magic-icon">✨</span>
+                        <span>魔术模式</span>
+                    </div>
+                </div>
+
+                <!-- 数字区域 -->
+                <div class="ios-magic-display hidden" id="ios-magic-display">
+                    <div class="magic-step" id="ios-magic-step">
+                        <div class="step-label" id="ios-step-label">请观众A说出6位数字</div>
+                        <div class="step-number" id="ios-step-number">------</div>
+                    </div>
+                </div>
+
+                <!-- iOS风格键盘区域 -->
+                <div class="ios-keypad">
+                    <!-- 第一行 -->
+                    <div class="ios-keypad-row">
+                        <button class="ios-btn ios-btn-dark" id="ios-audience-a-btn">观众A</button>
+                        <button class="ios-btn ios-btn-dark" id="ios-audience-b-btn">观众B</button>
+                        <button class="ios-btn ios-btn-operator" id="ios-audience-c-btn">观众C</button>
+                    </div>
+                    
+                    <!-- 数字输入行 -->
+                    <div class="ios-keypad-row">
+                        <button class="ios-btn ios-btn-number">7</button>
+                        <button class="ios-btn ios-btn-number">8</button>
+                        <button class="ios-btn ios-btn-number">9</button>
+                        <button class="ios-btn ios-btn-operator">÷</button>
+                    </div>
+                    
+                    <div class="ios-keypad-row">
+                        <button class="ios-btn ios-btn-number">4</button>
+                        <button class="ios-btn ios-btn-number">5</button>
+                        <button class="ios-btn ios-btn-number">6</button>
+                        <button class="ios-btn ios-btn-operator">×</button>
+                    </div>
+                    
+                    <div class="ios-keypad-row">
+                        <button class="ios-btn ios-btn-number">1</button>
+                        <button class="ios-btn ios-btn-number">2</button>
+                        <button class="ios-btn ios-btn-number">3</button>
+                        <button class="ios-btn ios-btn-operator">−</button>
+                    </div>
+                    
+                    <div class="ios-keypad-row">
+                        <button class="ios-btn ios-btn-number ios-btn-wide">0</button>
+                        <button class="ios-btn ios-btn-number">.</button>
+                        <button class="ios-btn ios-btn-operator">+</button>
+                    </div>
+                    
+                    <!-- 特殊功能行 -->
+                    <div class="ios-keypad-row">
+                        <button class="ios-btn ios-btn-clear" id="ios-clear-btn">AC</button>
+                        <button class="ios-btn ios-btn-function">+/-</button>
+                        <button class="ios-btn ios-btn-function">%</button>
+                        <button class="ios-btn ios-btn-equals" id="ios-equals-btn">=</button>
+                    </div>
+                </div>
+
+                <!-- 魔术输入界面 -->
+                <div class="ios-magic-input hidden" id="ios-magic-input">
+                    <div class="ios-input-header">
+                        <button class="ios-back-btn" id="ios-back-btn">←</button>
+                        <span class="ios-input-title" id="ios-input-title">观众A的数字</span>
+                        <button class="ios-confirm-btn" id="ios-confirm-btn">完成</button>
+                    </div>
+                    <div class="ios-input-field">
+                        <input type="text" id="ios-number-input" maxlength="6" class="ios-text-input" placeholder="输入6位数字">
+                    </div>
+                    <div class="ios-number-keypad">
+                        <!-- 数字键盘 -->
+                        <div class="ios-keypad-row">
+                            <button class="ios-btn ios-btn-number">1</button>
+                            <button class="ios-btn ios-btn-number">2</button>
+                            <button class="ios-btn ios-btn-number">3</button>
+                        </div>
+                        <div class="ios-keypad-row">
+                            <button class="ios-btn ios-btn-number">4</button>
+                            <button class="ios-btn ios-btn-number">5</button>
+                            <button class="ios-btn ios-btn-number">6</button>
+                        </div>
+                        <div class="ios-keypad-row">
+                            <button class="ios-btn ios-btn-number">7</button>
+                            <button class="ios-btn ios-btn-number">8</button>
+                            <button class="ios-btn ios-btn-number">9</button>
+                        </div>
+                        <div class="ios-keypad-row">
+                            <button class="ios-btn ios-btn-number ios-btn-wide">0</button>
+                            <button class="ios-btn ios-btn-number" id="ios-delete-btn">←</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 盲点输入界面 -->
+                <div class="ios-blind-touch hidden" id="ios-blind-touch">
+                    <div class="ios-blind-header">
+                        <span class="ios-blind-title">请观众C闭上眼睛，在屏幕上随意点击</span>
+                    </div>
+                    <div class="ios-touch-area" id="ios-touch-area">
+                        <div class="ios-touch-points" id="ios-touch-points"></div>
+                        <div class="ios-blind-overlay">
+                            <div class="ios-blind-text">🙏 闭上眼睛随意点击</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 计算过程界面 -->
+                <div class="ios-calculation hidden" id="ios-calculation">
+                    <div class="ios-calc-display">
+                        <div class="ios-calc-line" id="ios-calc-line-1">
+                            <span class="ios-calc-number" id="ios-calc-a">123456</span>
+                            <span class="ios-calc-op">+</span>
+                            <span class="ios-calc-number" id="ios-calc-c">789012</span>
+                        </div>
+                        <div class="ios-calc-line hidden" id="ios-calc-line-2">
+                            <span class="ios-calc-number">912468</span>
+                            <span class="ios-calc-op">−</span>
+                            <span class="ios-calc-number" id="ios-calc-b">345678</span>
+                        </div>
+                        <div class="ios-calc-result hidden" id="ios-calc-result">
+                            <span class="ios-calc-equals">=</span>
+                            <span class="ios-final-number" id="ios-final-result">????</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 时间揭晓界面 -->
+                <div class="ios-time-reveal hidden" id="ios-time-reveal">
+                    <div class="ios-reveal-animation">
+                        <div class="ios-magic-text">神奇的时间</div>
+                        <div class="ios-time-result" id="ios-time-result">00:00</div>
+                        <div class="ios-reveal-subtitle">就是现在！</div>
+                    </div>
+                </div>
+
+                <!-- 重新开始按钮 -->
+                <div class="ios-restart hidden" id="ios-restart">
+                    <button class="ios-restart-btn" id="ios-restart-btn">再来一次</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 加载JavaScript -->
+    <script src="scripts/animations.js"></script>
+    <script src="scripts/apple-magic-sequence.js"></script>
+    <script src="scripts/calculator.js"></script>
+</body>
+</html>

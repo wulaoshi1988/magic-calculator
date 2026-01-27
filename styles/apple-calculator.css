@@ -1,0 +1,340 @@
+/* 苹果计算器样式 */
+.apple-calculator {
+    background: #000000;
+    border-radius: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    max-width: 380px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+/* 显示屏 */
+.display {
+    background: #000000;
+    padding: 20px;
+    text-align: right;
+    margin-bottom: 20px;
+    border-radius: 0;
+}
+
+.main-display {
+    color: #ffffff;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -2px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-family: 'SF Mono', 'Monaco', monospace;
+}
+
+.operation-display {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 300;
+    opacity: 0.6;
+    margin-bottom: 8px;
+    min-height: 24px;
+}
+
+/* 键盘区域 */
+.keypad {
+    display: grid;
+    gap: 12px;
+}
+
+.keypad-row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+/* 按钮样式 */
+.btn {
+    flex: 1;
+    height: 72px;
+    border: none;
+    border-radius: 50%;
+    font-size: 32px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.btn:active::before {
+    width: 100%;
+    height: 100%;
+}
+
+/* 数字按钮 */
+.number-buttons .btn {
+    background: #333333;
+    color: #ffffff;
+}
+
+.number-buttons .btn:hover {
+    background: #4a4a4a;
+}
+
+/* 运算符按钮 */
+.operator-buttons .btn {
+    background: #ff9f0a;
+    color: #ffffff;
+}
+
+.operator-buttons .btn:hover {
+    background: #ffb145;
+}
+
+/* 功能按钮 */
+.btn-clear {
+    background: #a6a6a6;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.btn-clear:hover {
+    background: #bfbfbf;
+}
+
+/* 等号按钮 */
+.btn-equals {
+    background: #ff9f0a;
+    color: #ffffff;
+    font-size: 36px;
+}
+
+.btn-equals:hover {
+    background: #ffb145;
+}
+
+/* 零按钮特殊宽度 */
+.btn[data-value="0"] {
+    flex: 2.2;
+    border-radius: 36px;
+}
+
+/* 魔术模式指示器 */
+.magic-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    color: #ff9f0a;
+    opacity: 0;
+    animation: magicIndicatorPulse 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.magic-indicator.active {
+    opacity: 0.3;
+}
+
+@keyframes magicIndicatorPulse {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+/* 魔术模式效果 */
+.apple-calculator.magic-mode {
+    animation: magicGlow 2s ease-in-out infinite;
+}
+
+@keyframes magicGlow {
+    0%, 100% { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
+    50% { box-shadow: 0 20px 80px rgba(255, 159, 10, 0.2); }
+}
+
+/* 盲点输入效果 */
+.blind-input-effect {
+    animation: blindInputGlow 1s ease-in-out;
+}
+
+@keyframes blindInputGlow {
+    0%, 100% { background: #000000; }
+    50% { background: #1a0800; }
+}
+
+/* 魔术结果动画 */
+.magic-result-animation {
+    animation: magicResultReveal 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes magicResultReveal {
+    0% { transform: scale(0.8) rotate(180deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(90deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* 数字闪烁效果 */
+.number-flash {
+    animation: numberFlash 0.3s ease-out;
+}
+
+@keyframes numberFlash {
+    0% { color: #ffffff; }
+    50% { color: #ff9f0a; transform: scale(1.1); }
+    100% { color: #ffffff; transform: scale(1); }
+}
+
+/* 提示信息 */
+.magic-hint {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 1000;
+    animation: hintSlideIn 0.3s ease-out;
+    backdrop-filter: blur(10px);
+}
+
+@keyframes hintSlideIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* 结果显示界面 */
+.magic-result-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #000000;
+    border-radius: 40px;
+    padding: 40px;
+    text-align: center;
+    z-index: 2000;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    min-width: 350px;
+    animation: modalAppear 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes modalAppear {
+    0% { transform: translate(-50%, -50%) scale(0.8) rotateX(90deg); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1) rotateX(0deg); opacity: 1; }
+}
+
+.magic-result-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.magic-result-value {
+    font-size: 48px;
+    font-weight: 700;
+    color: #ff9f0a;
+    margin-bottom: 15px;
+    font-family: 'SF Mono', 'Monaco', monospace;
+    letter-spacing: 2px;
+}
+
+.magic-result-meaning {
+    font-size: 18px;
+    color: #ffffff;
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
+
+.magic-restart-btn {
+    background: #ff9f0a;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.magic-restart-btn:hover {
+    background: #ffb145;
+    transform: translateY(-2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 414px) {
+    .apple-calculator {
+        border-radius: 20px;
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .btn {
+        height: 60px;
+        font-size: 28px;
+    }
+    
+    .main-display {
+        font-size: 60px;
+    }
+    
+    .magic-result-value {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 375px) {
+    .btn {
+        height: 56px;
+        font-size: 24px;
+    }
+    
+    .main-display {
+        font-size: 56px;
+    }
+    
+    .magic-result-value {
+        font-size: 32px;
+    }
+}
+
+/* 横屏适配 */
+@media (orientation: landscape) and (max-height: 500px) {
+    .apple-calculator {
+        max-width: 500px;
+        margin: 20px auto;
+    }
+    
+    .btn {
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .main-display {
+        font-size: 48px;
+    }
+}

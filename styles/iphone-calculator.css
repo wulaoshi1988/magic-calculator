@@ -151,6 +151,24 @@ body {
     font-weight: 600;
 }
 
+/* 魔术模式下的AC键 */
+.btn-clear.magic-mode-active {
+    background: #ff3b30; /* 红色，明显区分 */
+    color: #ffffff;
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0%, 100% {
+        background: #ff3b30;
+        transform: scale(1);
+    }
+    50% {
+        background: #ff6b60;
+        transform: scale(1.02);
+    }
+}
+
 .btn-equals {
     background: #ff9f0a;
     color: #ffffff;

@@ -117,6 +117,8 @@ class AppleMagicCalculator {
         // 添加苹果计算器魔术效果
         this.elements.appleCalculator.classList.add('magic-mode');
         this.elements.magicIndicator.classList.add('active');
+        // AC键变为魔术模式颜色
+        this.elements.clearButton.classList.add('magic-mode-active');
         
         // 显示第一步提示
         this.showMagicHint('步骤1: 请观众A输入任意6位数字...');
@@ -177,6 +179,8 @@ class AppleMagicCalculator {
         
         // 清除计算器
         this.clear();
+        // 移除AC键的魔术模式样式
+        this.elements.clearButton.classList.remove('magic-mode-active');
         
         console.log('✅ 魔术模式已退出');
     }

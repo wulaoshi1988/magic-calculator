@@ -7,6 +7,9 @@
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -15,14 +18,25 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
     background: #000000;
     min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 #app {
     flex: 1;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 /* 头部适配 */
@@ -37,12 +51,13 @@ body {
     box-shadow: none; /* 移除阴影 */
     padding: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: hidden;
 }
 
 /* 隐藏所有魔术相关元素 */
@@ -93,6 +108,9 @@ body {
     padding: 12px;
     flex: 1;
     background: #000000;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 
 .keypad-row {
@@ -121,6 +139,11 @@ body {
     outline: none;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
 }
 
 /* 移除所有动画和伪元素 */

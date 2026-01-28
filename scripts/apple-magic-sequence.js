@@ -45,6 +45,12 @@ class AppleMagicCalculator {
             button.addEventListener('click', () => {
                 this.handleNumberWithMagic(button.dataset.value);
             });
+            // 添加触摸事件支持
+            button.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.handleNumberWithMagic(button.dataset.value);
+            }, { passive: false });
         });
         
         // 运算符按钮事件
@@ -52,42 +58,62 @@ class AppleMagicCalculator {
             button.addEventListener('click', () => {
                 this.handleOperatorWithMagic(button.dataset.value);
             });
+            // 添加触摸事件支持
+            button.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.handleOperatorWithMagic(button.dataset.value);
+            }, { passive: false });
         });
         
         // 清除和等号按钮
         this.elements.clearButton.addEventListener('click', () => {
             this.clearWithMagic();
         });
+        this.elements.clearButton.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.clearWithMagic();
+        }, { passive: false });
         
         this.elements.equalsButton.addEventListener('click', () => {
             this.equalsWithMagic();
         });
+        this.elements.equalsButton.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.equalsWithMagic();
+        }, { passive: false });
         
         // 键盘支持
         document.addEventListener('keydown', (e) => {
             this.handleKeyboardWithMagic(e);
         });
         
-        // 双击和空格键备用触发
+        // 双击和空格键备用触发（仅桌面端）
         let lastClickTime = 0;
-        document.addEventListener('click', (e) => {
-            const isBlankArea = (
-                e.target === document.body || 
-                e.target.id === 'app' ||
-                e.target.id === 'header' ||
-                e.target.classList.contains('subtitle') ||
-                e.target.tagName === 'H1' ||
-                e.target.closest('#header')
-            );
-            
-            if (isBlankArea) {
-                const currentTime = Date.now();
-                if (currentTime - lastClickTime < 300) {
-                    this.startAppleMagicMode();
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (!isMobile) {
+            document.addEventListener('click', (e) => {
+                const isBlankArea = (
+                    e.target === document.body || 
+                    e.target.id === 'app' ||
+                    e.target.id === 'header' ||
+                    e.target.classList.contains('subtitle') ||
+                    e.target.tagName === 'H1' ||
+                    e.target.closest('#header')
+                );
+                
+                if (isBlankArea) {
+                    const currentTime = Date.now();
+                    if (currentTime - lastClickTime < 300) {
+                        this.startAppleMagicMode();
+                    }
+                    lastClickTime = currentTime;
                 }
-                lastClickTime = currentTime;
-            }
-        });
+            });
+        }
         
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space' && !this.isMagicMode) {
